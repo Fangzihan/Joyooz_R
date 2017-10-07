@@ -4,25 +4,44 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.net.URL;
 
-public class ui extends JFrame {
+public class ui extends JFrame implements MouseListener,MouseMotionListener,ActionListener{
+	number_tool numberTool;
 	
 	JLabel numberScreen;
 	JButton option;
 
 	ImageIcon logo;
 	JLabel logo_label;
+	
+	JLabel instruction;
+	JTextField input;
+	JButton check;
+	int x;
+	int y;
 	public ui() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		numberScreen=new 	JLabel("30",JLabel.CENTER);
+		numberTool=new number_tool();
+		numberScreen=new 	JLabel("--",JLabel.CENTER);
 		option=new JButton("设置");
 
-		URL url=ui.class.getResource("/res/logo.png");
-		logo=new ImageIcon(url);
+		URL url_logo=ui.class.getResource("/res/logo.png");
+		logo=new ImageIcon(url_logo);
 		logo_label=new JLabel(logo);
+		URL url_check=ui.class.getResource("/res/check.png");
+		
+		instruction=new JLabel("请输入最大学号");
+		input=new JTextField(10);
+		check=new JButton();
 		//inst objects
 		
 		numberScreen.setFont(new Font("微软雅黑",Font.BOLD,150));
 		numberScreen.setBorder(null);
+		
+		instruction.setForeground(new Color(51,153,255));
+		instruction.setFont(new Font("微软雅黑",0,40));
+		input.setFont(new Font("微软雅黑",0,40));
+		check.setIcon(new ImageIcon(url_check));
+		
 		//set objects
 		
 		this.getContentPane().setBackground(Color.WHITE);
@@ -39,17 +58,95 @@ public class ui extends JFrame {
 		logo_label.setBounds(0, -30,400,400);
 		
 		try {
-		Thread.sleep(3000);
+		Thread.sleep(750);
 		}catch(Exception e) {
 			
 		}
 		logo_label.setIcon(null);
 		logo_label.setVisible(false);
 		
-		this.add(numberScreen);
-		numberScreen.setBounds(40, 75, 300, 200);
-		//add objects
+		this.add(instruction);
+		this.add(input);
+		this.add(check);
+		check.addActionListener(this);
+		check.setActionCommand("check");
 		
+		instruction.setBounds(50, 100, 300, 50);
+		input.setBounds(50, 175, 250, 50);
+		check.setBounds(300, 175, 50, 50);
+		
+		
+		
+		
+	}
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+		this.x=arg0.getX();
+		this.y=arg0.getY();
+		System.out.print("x:"+x);
+		
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		if(((x>40)&&(x<340))&&((y>75)&&(y<275))) {
+			this.numberScreen.setText(""+numberTool.getNumber());
+			
+		}
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		
+		
+	}
+	@Override
+	public void actionPerformed(ActionEvent act) {
+		if(act.getActionCommand().equals("check")) {
+			System.out.println("点击");
+			try{
+				this.numberTool.setMax(Integer.parseInt(input.getText()));
+				
+				instruction.setVisible(false);
+				input.setVisible(false);
+				check.setVisible(false);
+				
+				this.add(numberScreen);
+				numberScreen.setBounds(40, 75, 300, 200);
+				this.addMouseListener(this);
+				this.addMouseMotionListener(this);
+				System.out.println("添加");
+				
+				//add objects
+			}catch(Exception e) {
+				System.out.println("Error!");
+			}
+			
+		}
 		
 	}
 }

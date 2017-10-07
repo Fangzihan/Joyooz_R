@@ -5,7 +5,7 @@ public class number_tool {
 	Random ran;
 	private int max;
 	public number_tool(){
-		ran=new Random();
+		ran=new Random(1526481);
 		
 	}
 	
