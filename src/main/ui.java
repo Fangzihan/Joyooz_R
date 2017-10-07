@@ -16,7 +16,7 @@ public class ui extends JFrame {
 		numberScreen=new 	JLabel("30",JLabel.CENTER);
 		option=new JButton("设置");
 
-		URL url=ui.class.getResource("/assets/logo.png");
+		URL url=ui.class.getResource("/res/logo.png");
 		logo=new ImageIcon(url);
 		logo_label=new JLabel(logo);
 		//inst objects
