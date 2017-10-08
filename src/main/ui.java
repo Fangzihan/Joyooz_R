@@ -50,6 +50,7 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 		this.setLocation(screenSize.width/2-200, screenSize.height/2-200);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setAlwaysOnTop(true);
 		this.setVisible(true);
 		//初始化界面
 		
@@ -88,7 +89,7 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 	public void mouseMoved(MouseEvent arg0) {
 		this.x=arg0.getX();
 		this.y=arg0.getY();
-		System.out.print("x:"+x);
+		//System.out.print("x:"+x);
 		
 		
 	}
@@ -127,7 +128,7 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 	@Override
 	public void actionPerformed(ActionEvent act) {
 		if(act.getActionCommand().equals("check")) {
-			System.out.println("点击");
+			//System.out.println("点击");
 			try{
 				this.numberTool.setMax(Integer.parseInt(input.getText()));
 				
@@ -139,7 +140,7 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 				numberScreen.setBounds(40, 75, 300, 200);
 				this.addMouseListener(this);
 				this.addMouseMotionListener(this);
-				System.out.println("添加");
+				//System.out.println("添加");
 				
 				//add objects
 			}catch(Exception e) {
