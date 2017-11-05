@@ -23,6 +23,7 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 	int number;
 	int condition;
 	public ui() {
+		number=1;
 		condition=0;
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		numberScreen=new 	JLabel("--",JLabel.CENTER);

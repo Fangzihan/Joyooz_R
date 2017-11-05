@@ -20,7 +20,17 @@ public class stop extends Thread{
 			{}
 			main.UI.setT(""+main.UI.number);
 		}
+		for(int a=0;a<3;a++) {
+			main.UI.setT(""+main.UI.number);
+			try {Thread.sleep(500);}catch(Exception e) {}
+			main.UI.setT("");
+			try {Thread.sleep(500);}catch(Exception e) {}
+
+		}
+		main.UI.setT(""+main.UI.number);
+		try {Thread.sleep(500);}catch(Exception e) {}
 		System.out.println("Stop!");
+		
 		this.stop();
     }
 }

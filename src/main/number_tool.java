@@ -5,7 +5,6 @@ public class number_tool extends Thread{
 	int i;
 	public void run() {
 		i=500;
-		main.UI.number=1;
 		for(int a=0;;a++) {
 			main.UI.setT(""+main.UI.number);
 			main.UI.number++;
@@ -15,6 +14,9 @@ public class number_tool extends Thread{
 			}
 			if(i>40) {
 				i=i-50;
+				
+			}else if(i<=40) {
+				i=4;
 				
 			}
 			
