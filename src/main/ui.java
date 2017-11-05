@@ -5,10 +5,11 @@ import javax.swing.*;
 import java.net.URL;
 
 public class ui extends JFrame implements MouseListener,MouseMotionListener,ActionListener{
-	number_tool numberTool;
-	
 	JLabel numberScreen;
 	JButton option;
+	
+	number_tool numberTool;
+	stop Stop;
 
 	ImageIcon logo;
 	JLabel logo_label;
@@ -18,9 +19,12 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 	JButton check;
 	int x;
 	int y;
+	int max;
+	int number;
+	int condition;
 	public ui() {
+		condition=0;
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		numberTool=new number_tool();
 		numberScreen=new 	JLabel("--",JLabel.CENTER);
 		option=new JButton("设置");
 
@@ -97,7 +101,21 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		if(((x>40)&&(x<340))&&((y>75)&&(y<275))) {
-			this.numberScreen.setText(""+numberTool.getNumber());
+			if(condition==0) {
+				System.out.println("准备Start!");
+				Stop=null;
+				this.numberTool=new number_tool();
+				this.numberTool.start();
+				System.out.println("Start");
+				condition=1;
+			}else if(condition==1) {
+				System.out.println("准备Stop!");
+				numberTool.stop();
+				numberTool=null;
+				this.Stop=new stop();
+				Stop.start();
+				condition=0;
+			}
 			
 		}
 		
@@ -130,7 +148,7 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 		if(act.getActionCommand().equals("check")) {
 			//System.out.println("点击");
 			try{
-				this.numberTool.setMax(Integer.parseInt(input.getText()));
+				this.max=(Integer.parseInt(input.getText()));
 				
 				instruction.setVisible(false);
 				input.setVisible(false);
@@ -148,6 +166,11 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 			}
 			
 		}
+		
+	}
+	public void setT(String t) {
+		this.numberScreen.setText(t);
+		System.out.println(this.numberScreen.getText());
 		
 	}
 }
