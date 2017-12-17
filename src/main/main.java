@@ -2,8 +2,9 @@ package main;
 
 public class main {
 	public static ui UI;
+	public static String version;
 	public static void main(String[] args) {
-		String version="0.2";
+		version="0.3";
 		UI=new ui();
 		
 	}
