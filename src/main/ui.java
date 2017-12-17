@@ -14,9 +14,13 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 	ImageIcon logo;
 	JLabel logo_label;
 	
+	ImageIcon ad1;
+	JLabel ad1_label;
+	
 	JLabel instruction;
 	JTextField input;
 	JButton check;
+	JButton close_ad;
 	int x;
 	int y;
 	int max;
@@ -33,10 +37,15 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 		logo=new ImageIcon(url_logo);
 		logo_label=new JLabel(logo);
 		URL url_check=ui.class.getResource("/res/check.png");
+		URL url_ad1=ui.class.getResource("/res/ad1.png");
+		URL url_close_ad=ui.class.getResource("/res/close_ad.png");
+		ad1=new ImageIcon(url_ad1);
+		ad1_label=new JLabel(ad1);
 		
 		instruction=new JLabel("请输入最大学号");
 		input=new JTextField(10);
 		check=new JButton();
+		close_ad=new JButton();
 		//inst objects
 		
 		numberScreen.setFont(new Font("微软雅黑",Font.BOLD,150));
@@ -46,6 +55,7 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 		instruction.setFont(new Font("微软雅黑",0,40));
 		input.setFont(new Font("微软雅黑",0,40));
 		check.setIcon(new ImageIcon(url_check));
+		close_ad.setIcon(new ImageIcon(url_close_ad));
 		
 		//set objects
 		
@@ -64,7 +74,7 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 		logo_label.setBounds(0, -30,400,400);
 		
 		try {
-		Thread.sleep(750);
+		Thread.sleep(2500);
 		}catch(Exception e) {
 			
 		}
@@ -76,6 +86,8 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 		this.add(check);
 		check.addActionListener(this);
 		check.setActionCommand("check");
+		close_ad.addActionListener(this);
+		close_ad.setActionCommand("close_ad");
 		
 		instruction.setBounds(50, 100, 300, 50);
 		input.setBounds(50, 175, 250, 50);
@@ -157,6 +169,10 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 				
 				this.add(numberScreen);
 				numberScreen.setBounds(40, 75, 300, 200);
+				this.add(ad1_label);
+				this.add(close_ad);
+				ad1_label.setBounds(0,325,400,50);
+				close_ad.setBounds(350, 325, 50, 50);
 				this.addMouseListener(this);
 				this.addMouseMotionListener(this);
 				//System.out.println("添加");
@@ -165,6 +181,11 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 			}catch(Exception e) {
 				System.out.println("Error!");
 			}
+			
+		}else if(act.getActionCommand().equals("close_ad")) {
+			ad1_label.setVisible(false);
+			close_ad.setVisible(false);
+			
 			
 		}
 		
