@@ -71,6 +71,10 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 		
 		this.setLayout(null);
 		this.add(logo_label);
+		
+		close_ad.addActionListener(this);
+		close_ad.setActionCommand("close_ad");
+		
 		logo_label.setBounds(0, -30,400,400);
 		
 		try {
@@ -78,25 +82,31 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 		}catch(Exception e) {
 			
 		}
-		logo_label.setIcon(null);
-		logo_label.setVisible(false);
 		
-		this.add(instruction);
-		this.add(input);
-		this.add(check);
-		check.addActionListener(this);
-		check.setActionCommand("check");
-		close_ad.addActionListener(this);
-		close_ad.setActionCommand("close_ad");
+		this.input_number_ui();
 		
-		instruction.setBounds(50, 100, 300, 50);
-		input.setBounds(50, 175, 250, 50);
-		check.setBounds(300, 175, 50, 50);
 		
 		
 		
 		
 	}
+	
+	public void input_number_ui() {
+		logo_label.setIcon(null);
+		logo_label.setVisible(false);
+		//将开头图片设为不可见
+		this.add(instruction);
+		this.add(input);
+		this.add(check);
+		check.addActionListener(this);
+		check.setActionCommand("check");
+		
+		instruction.setBounds(50, 100, 300, 50);
+		input.setBounds(50, 175, 250, 50);
+		check.setBounds(300, 175, 50, 50);
+		
+	} 
+	
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
 		
@@ -115,14 +125,12 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 	public void mouseClicked(MouseEvent arg0) {
 		if(((x>40)&&(x<340))&&((y>75)&&(y<275))) {
 			if(condition==0) {
-				System.out.println("准备Start!");
 				Stop=null;
 				this.numberTool=new number_tool();
 				this.numberTool.start();
 				System.out.println("Start");
 				condition=1;
 			}else if(condition==1) {
-				System.out.println("准备Stop!");
 				numberTool.stop();
 				numberTool=null;
 				this.Stop=new stop();
