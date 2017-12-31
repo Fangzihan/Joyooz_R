@@ -6,7 +6,7 @@ import java.net.URL;
 
 public class ui extends JFrame implements MouseListener,MouseMotionListener,ActionListener{
 	JLabel numberScreen;
-	JButton option;
+	//JButton option;
 	
 	number_tool numberTool;
 	stop Stop;
@@ -20,32 +20,44 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 	JLabel instruction;
 	JTextField input;
 	JButton check;
-	JButton close_ad;
-	int x;
-	int y;
+
+	JLabel speed_choose_instruction;
+	JButton slow_button;
+	JButton normal_button;
+	JButton fast_button;
+	
+	
+	JLabel border1_label;
+	JLabel border2_label;
+	JLabel border3_label;
+	JLabel border4_label;
 	int max;
 	int number;
 	int condition;
 	public ui() {
+		image.init();
 		number=1;
 		condition=0;
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		numberScreen=new 	JLabel("--",JLabel.CENTER);
-		option=new JButton("设置");
-
-		URL url_logo=ui.class.getResource("/res/logo.png");
-		logo=new ImageIcon(url_logo);
-		logo_label=new JLabel(logo);
-		URL url_check=ui.class.getResource("/res/check.png");
-		URL url_ad1=ui.class.getResource("/res/ad1.png");
-		URL url_close_ad=ui.class.getResource("/res/close_ad.png");
-		ad1=new ImageIcon(url_ad1);
-		ad1_label=new JLabel(ad1);
+		//option=new JButton("设置");
+		logo_label=new JLabel(image.begin);
+		
 		
 		instruction=new JLabel("请输入最大学号");
 		input=new JTextField(10);
 		check=new JButton();
-		close_ad=new JButton();
+		
+		speed_choose_instruction=new JLabel();
+		slow_button=new JButton();
+		normal_button=new JButton();
+		fast_button=new JButton();
+		
+		border1_label=new JLabel();
+		border2_label=new JLabel();
+		border3_label=new JLabel();
+		border4_label=new JLabel();
+		
 		//inst objects
 		
 		numberScreen.setFont(new Font("微软雅黑",Font.BOLD,150));
@@ -54,8 +66,11 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 		instruction.setForeground(new Color(51,153,255));
 		instruction.setFont(new Font("微软雅黑",0,40));
 		input.setFont(new Font("微软雅黑",0,40));
-		check.setIcon(new ImageIcon(url_check));
-		close_ad.setIcon(new ImageIcon(url_close_ad));
+		check.setIcon(image.check);
+		
+	
+		
+
 		
 		//set objects
 		
@@ -72,8 +87,6 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 		this.setLayout(null);
 		this.add(logo_label);
 		
-		close_ad.addActionListener(this);
-		close_ad.setActionCommand("close_ad");
 		
 		logo_label.setBounds(0, -30,400,400);
 		
@@ -107,6 +120,18 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 		
 	} 
 	
+	public void choose_speed_ui() {
+		//setInvisible
+		instruction.setVisible(false);
+		input.setVisible(false);
+		check.setVisible(false);
+		//remove
+		this.remove(instruction);
+		this.remove(input);
+		this.remove(check);
+		//add
+	}
+	
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
 		
@@ -114,16 +139,13 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
-		this.x=arg0.getX();
-		this.y=arg0.getY();
-		//System.out.print("x:"+x);
 		
 		
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		if(((x>40)&&(x<340))&&((y>75)&&(y<275))) {
+		if(((arg0.getX()>40)&&(arg0.getX()<340))&&((arg0.getY()>75)&&(arg0.getY()<275))) {
 			if(condition==0) {
 				Stop=null;
 				this.numberTool=new number_tool();
@@ -178,9 +200,7 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 				this.add(numberScreen);
 				numberScreen.setBounds(40, 75, 300, 200);
 				this.add(ad1_label);
-				this.add(close_ad);
 				ad1_label.setBounds(0,325,400,50);
-				close_ad.setBounds(350, 325, 50, 50);
 				this.addMouseListener(this);
 				this.addMouseMotionListener(this);
 				//System.out.println("添加");
@@ -192,7 +212,6 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 			
 		}else if(act.getActionCommand().equals("close_ad")) {
 			ad1_label.setVisible(false);
-			close_ad.setVisible(false);
 			
 			
 		}
