@@ -1,4 +1,5 @@
 package main;
+import java.util.Random;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -31,9 +32,11 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 	JLabel border2_label;
 	JLabel border3_label;
 	JLabel border4_label;
+	public Random random;
 	int max;
 	int number;
 	int condition;
+	
 	public ui() {
 		image.init();
 		number=1;
@@ -48,7 +51,7 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 		input=new JTextField(10);
 		check=new JButton();
 		
-		speed_choose_instruction=new JLabel();
+		speed_choose_instruction=new JLabel("请选择速度");
 		slow_button=new JButton();
 		normal_button=new JButton();
 		fast_button=new JButton();
@@ -57,6 +60,7 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 		border2_label=new JLabel();
 		border3_label=new JLabel();
 		border4_label=new JLabel();
+		random=new Random();
 		
 		//inst objects
 		
@@ -68,6 +72,16 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 		input.setFont(new Font("微软雅黑",0,40));
 		check.setIcon(image.check);
 		
+		speed_choose_instruction.setFont(new Font("微软雅黑",0,40));
+		speed_choose_instruction.setForeground(new Color(51,153,255));
+		slow_button.setIcon(image.slow);
+		normal_button.setIcon(image.normal);
+		fast_button.setIcon(image.fast);
+		
+		border1_label.setIcon(image.border1);
+		border2_label.setIcon(image.border2);
+		border3_label.setIcon(image.border3);
+		border4_label.setIcon(image.border4);
 	
 		
 
@@ -75,7 +89,8 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 		//set objects
 		
 		this.getContentPane().setBackground(Color.WHITE);
-		this.setTitle("Joyooz学号机"+main.version);
+		this.setTitle("Joyooz学号机");
+		//this.setIconImage(new ImageIcon(this.getClass().getResource("/res/icon.png")).getImage());
 		this.setSize(400, 400);
 		this.setLocation(screenSize.width/2-200, screenSize.height/2-200);
 		this.setResizable(false);
@@ -86,6 +101,16 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 		
 		this.setLayout(null);
 		this.add(logo_label);
+		
+		//this.add(border1_label);
+		this.add(border2_label);
+		//this.add(border3_label);
+		//this.add(border4_label);
+		
+		//border1_label.setBounds(0,0,400,50);
+		border2_label.setBounds(0,320,400,50);
+		//border3_label.setBounds(0,50,50,300);
+		//border4_label.setBounds(350,50,50,300);
 		
 		
 		logo_label.setBounds(0, -30,400,400);
@@ -130,6 +155,42 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 		this.remove(input);
 		this.remove(check);
 		//add
+		this.add(speed_choose_instruction);
+		this.add(slow_button);
+		this.add(normal_button);
+		this.add(fast_button);
+		
+		speed_choose_instruction.setBounds(75,80,300,50);
+		slow_button.setBounds(75, 150, 80, 50);
+		normal_button.setBounds(160,150 , 80, 50);
+		fast_button.setBounds(245, 150, 80, 50);
+		
+		slow_button.addActionListener(this);
+		slow_button.setActionCommand("slow");
+		normal_button.addActionListener(this);
+		normal_button.setActionCommand("normal");
+		fast_button.addActionListener(this);
+		fast_button.setActionCommand("fast");
+	}
+	
+	public void number_ui() {
+		//setInvisible
+		speed_choose_instruction.setVisible(false);
+		slow_button.setVisible(false);
+		normal_button.setVisible(false);
+		fast_button.setVisible(false);
+		//remove
+		this.remove(speed_choose_instruction);
+		this.remove(slow_button);
+		this.remove(normal_button);
+		this.remove(fast_button);
+		
+		//add
+		this.add(numberScreen);
+		numberScreen.setBounds(40, 75, 300, 200);
+		this.addMouseListener(this);
+		this.addMouseMotionListener(this);
+		
 	}
 	
 	@Override
@@ -192,27 +253,28 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 			//System.out.println("点击");
 			try{
 				this.max=(Integer.parseInt(input.getText()));
-				
-				instruction.setVisible(false);
-				input.setVisible(false);
-				check.setVisible(false);
-				
-				this.add(numberScreen);
-				numberScreen.setBounds(40, 75, 300, 200);
-				this.add(ad1_label);
-				ad1_label.setBounds(0,325,400,50);
-				this.addMouseListener(this);
-				this.addMouseMotionListener(this);
-				//System.out.println("添加");
-				
-				//add objects
 			}catch(Exception e) {
 				System.out.println("Error!");
 			}
+			this.choose_speed_ui();
 			
-		}else if(act.getActionCommand().equals("close_ad")) {
-			ad1_label.setVisible(false);
+		}else if(act.getActionCommand().equals("slow")) {
+			main.roll_speed=20;
+			main.end_speed=1;
+			main.tick=600;
+			this.number_ui();
 			
+		}else if(act.getActionCommand().equals("normal")) {
+			main.roll_speed=8;
+			main.end_speed=3;
+			main.tick=450;
+			this.number_ui();
+			
+		}else if(act.getActionCommand().equals("fast")) {
+			main.roll_speed=3;
+			main.end_speed=5;
+			main.tick=300;
+			this.number_ui();
 			
 		}
 		
