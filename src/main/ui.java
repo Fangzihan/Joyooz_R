@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.net.URL;
 
 public class ui extends JFrame implements MouseListener,MouseMotionListener,ActionListener{
+	floatUI FU;
 	JLabel numberScreen;
 	//JButton option;
 	
@@ -38,6 +39,7 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 	int condition;
 	
 	public ui() {
+		FU=new floatUI();
 		image.init();
 		number=1;
 		condition=0;
@@ -177,6 +179,8 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 	
 	public void number_ui() {
 		//setInvisible
+		this.add(border1_label);
+		border1_label.setBounds(0,0,400,50);
 		speed_choose_instruction.setVisible(false);
 		slow_button.setVisible(false);
 		normal_button.setVisible(false);
@@ -208,23 +212,31 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		if(((arg0.getX()>40)&&(arg0.getX()<340))&&((arg0.getY()>75)&&(arg0.getY()<275))) {
-			if(condition==0) {
-				Stop=null;
-				this.numberTool=new number_tool();
-				this.numberTool.start();
-				System.out.println("Start");
-				condition=1;
-			}else if(condition==1) {
-				numberTool.stop();
-				numberTool=null;
-				this.Stop=new stop();
-				Stop.start();
-				condition=0;
-			}
+			if(arg0.getButton()==MouseEvent.BUTTON1)
+			{
+				if(((arg0.getX()>40)&&(arg0.getX()<340))&&((arg0.getY()>75)&&(arg0.getY()<275))) {
+					if(condition==0) {
+						Stop=null;
+						this.numberTool=new number_tool();
+						this.numberTool.start();
+						System.out.println("Start");
+						condition=1;
+					}else if(condition==1) {
+						numberTool.stop();
+						numberTool=null;
+						this.Stop=new stop();
+						Stop.start();
+						condition=0;
+					}
 			
-		}
+				}
+			}else if(arg0.getButton()==MouseEvent.BUTTON3) 
+			{
+				border1_label.setVisible(false);
+				this.setVisible(false);
+				FU.setVisible(true);
 		
+			}
 	}
 
 	@Override

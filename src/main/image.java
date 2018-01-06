@@ -18,6 +18,8 @@ public class image {
 	public static URL url_border3;
 	public static URL url_border4;
 	
+	public static URL url_floatUI;
+	
 	//imageicon
 	public static ImageIcon icon;
 	//situation1
@@ -33,6 +35,7 @@ public class image {
 	public static ImageIcon border2;
 	public static ImageIcon border3;
 	public static ImageIcon border4;
+	public static ImageIcon floatUI_image;
 	
 		public static void init() {
 			url_icon=ui.class.getResource("/res/icon.png");
@@ -45,7 +48,7 @@ public class image {
 			url_border2=ui.class.getResource("/res/border2.png");
 			url_border3=ui.class.getResource("/res/border3.png");
 			url_border4=ui.class.getResource("/res/border4.png");
-			
+			url_floatUI=ui.class.getResource("/res/floatUI.png");
 			//icon=new ImageIcon(url_icon);
 			begin=new ImageIcon(url_begin);
 			check=new ImageIcon(url_check);
@@ -56,6 +59,7 @@ public class image {
 			border2=new ImageIcon(url_border2);
 			border3=new ImageIcon(url_border3);
 			border4=new ImageIcon(url_border4);
+			floatUI_image=new ImageIcon(url_floatUI);
 		}
 	
 }
