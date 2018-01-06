@@ -89,7 +89,9 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 		//set objects
 		
 		this.getContentPane().setBackground(Color.WHITE);
+
 		this.setTitle("Joyooz学号机");
+
 		//this.setIconImage(new ImageIcon(this.getClass().getResource("/res/icon.png")).getImage());
 		this.setSize(400, 400);
 		this.setLocation(screenSize.width/2-200, screenSize.height/2-200);
