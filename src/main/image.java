@@ -36,7 +36,7 @@ public class image {
 	public static ImageIcon border3;
 	public static ImageIcon border4;
 	public static ImageIcon floatUI_image;
-	
+	//effects
 		public static void init() {
 			url_icon=ui.class.getResource("/res/icon.png");
 			url_begin=ui.class.getResource("/res/logo.png");
@@ -49,7 +49,7 @@ public class image {
 			url_border3=ui.class.getResource("/res/border3.png");
 			url_border4=ui.class.getResource("/res/border4.png");
 			url_floatUI=ui.class.getResource("/res/floatUI.png");
-			//icon=new ImageIcon(url_icon);
+			icon=new ImageIcon(url_icon);
 			begin=new ImageIcon(url_begin);
 			check=new ImageIcon(url_check);
 			slow=new ImageIcon(url_slow);

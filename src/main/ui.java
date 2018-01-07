@@ -39,8 +39,8 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 	int condition;
 	
 	public ui() {
-		FU=new floatUI();
 		image.init();
+		FU=new floatUI();
 		number=1;
 		condition=0;
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -94,7 +94,7 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 
 		this.setTitle("Joyooz学号机");
 
-		//this.setIconImage(new ImageIcon(this.getClass().getResource("/res/icon.png")).getImage());
+		this.setIconImage(image.icon.getImage());
 		this.setSize(400, 400);
 		this.setLocation(screenSize.width/2-200, screenSize.height/2-200);
 		this.setResizable(false);
@@ -296,6 +296,10 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 	public void setT(String t) {
 		this.numberScreen.setText(t);
 		System.out.println(this.numberScreen.getText());
+		
+	}
+	public void paint(Graphics g) {
+		super.paint(g);
 		
 	}
 }

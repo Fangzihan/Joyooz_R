@@ -18,6 +18,7 @@ public class floatUI extends JFrame  implements MouseListener,MouseMotionListene
 		this.setUndecorated(true);
 		this.setSize(70,70);
 		this.setLocation(screenSize.width-70,screenSize.height/8);
+		this.setIconImage(image.icon.getImage());
 		this.setAlwaysOnTop(true);
 		this.setLayout(null);
 		this.add(img);
