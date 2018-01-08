@@ -7,7 +7,7 @@ public class main {
 	public static int end_speed;
 	public static int tick;
 	public static void main(String[] args) {
-		version="0.4.1.1(New Year Update!)";
+		version="0.4.2.1";
 		UI=new ui();
 		
 	}
