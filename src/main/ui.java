@@ -9,6 +9,7 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 	floatUI FU;
 	JLabel numberScreen;
 	//JButton option;
+	JLabel version;
 	
 	number_tool numberTool;
 	stop Stop;
@@ -39,8 +40,8 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 	int condition;
 	
 	public ui() {
-		FU=new floatUI();
 		image.init();
+		FU=new floatUI();
 		number=1;
 		condition=0;
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -80,6 +81,7 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 		normal_button.setIcon(image.normal);
 		fast_button.setIcon(image.fast);
 		
+		//初始化边框
 		border1_label.setIcon(image.border1);
 		border2_label.setIcon(image.border2);
 		border3_label.setIcon(image.border3);
@@ -94,7 +96,7 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 
 		this.setTitle("Joyooz学号机");
 
-		//this.setIconImage(new ImageIcon(this.getClass().getResource("/res/icon.png")).getImage());
+		this.setIconImage(image.icon.getImage());
 		this.setSize(400, 400);
 		this.setLocation(screenSize.width/2-200, screenSize.height/2-200);
 		this.setResizable(false);
@@ -106,15 +108,25 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 		this.setLayout(null);
 		this.add(logo_label);
 		
+		///以下注释是因为暂时有一些边框用不到
 		//this.add(border1_label);
-		this.add(border2_label);
+		//this.add(border2_label);
 		//this.add(border3_label);
 		//this.add(border4_label);
 		
 		//border1_label.setBounds(0,0,400,50);
-		border2_label.setBounds(0,320,400,50);
+		//border2_label.setBounds(0,320,400,50);
 		//border3_label.setBounds(0,50,50,300);
 		//border4_label.setBounds(350,50,50,300);
+		
+		//==========版本号===========
+		version=new JLabel("Version:"+main.version);
+		version.setHorizontalAlignment(SwingConstants.RIGHT);
+		version.setFont(new Font("微软雅黑",0,10));
+		version.setForeground(Color.DARK_GRAY);
+		this.add(version);
+		version.setBounds(200,345,180,25);
+		//==========版本号===========
 		
 		
 		logo_label.setBounds(0, -30,400,400);
@@ -219,7 +231,6 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 						Stop=null;
 						this.numberTool=new number_tool();
 						this.numberTool.start();
-						System.out.println("Start");
 						condition=1;
 					}else if(condition==1) {
 						numberTool.stop();
@@ -265,12 +276,15 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 	public void actionPerformed(ActionEvent act) {
 		if(act.getActionCommand().equals("check")) {
 			//System.out.println("点击");
-			try{
-				this.max=(Integer.parseInt(input.getText()));
-			}catch(Exception e) {
-				System.out.println("Error!");
+			if(!input.getText().equals("")) {
+				try{
+					this.max=(Integer.parseInt(input.getText()));
+					this.choose_speed_ui();
+				}catch(Exception e) {
+				}
+			}else{
+				instruction.setForeground(Color.red);
 			}
-			this.choose_speed_ui();
 			
 		}else if(act.getActionCommand().equals("slow")) {
 			main.roll_speed=20;
@@ -295,7 +309,6 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 	}
 	public void setT(String t) {
 		this.numberScreen.setText(t);
-		System.out.println(this.numberScreen.getText());
 		
 	}
 }

@@ -16,7 +16,9 @@ public class stop extends Thread{
 			}
 			catch(Exception e)
 			{}
-			main.UI.setT(""+main.UI.number);
+			synchronized(this) {
+				main.UI.setT(""+main.UI.number);
+			}
 		}
 		for(int a=0;a<3;a++) {
 			main.UI.setT(""+main.UI.number);
@@ -27,7 +29,6 @@ public class stop extends Thread{
 		}
 		main.UI.setT(""+main.UI.number);
 		try {Thread.sleep(main.tick);}catch(Exception e) {}
-		System.out.println("Stop!");
 		
 		this.stop();
     }
