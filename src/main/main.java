@@ -8,7 +8,7 @@ public class main {
 	public static int tick;
 	public static void main(String[] args) {
 		//修改时间2018.3.10
-		version="0.4.1.1";
+		version="0.5.0.1";
 		UI=new ui();
 		
 	}
