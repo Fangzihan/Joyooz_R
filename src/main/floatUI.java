@@ -17,7 +17,7 @@ public class floatUI extends JFrame  implements MouseListener,MouseMotionListene
 		
 		JLabel img=new JLabel("R",JLabel.CENTER);
 		img.setFont(new java.awt.Font("微软雅黑",Font.BOLD,50));
-		img.setForeground(new Color(51,153,255));
+		img.setForeground(new Color(255,255,255));
 		//img.setIcon(image.floatUI_image);
 		this.setTitle("Joyooz学号机悬浮窗");
 		this.setIconImage(image.icon.getImage());
@@ -31,6 +31,7 @@ public class floatUI extends JFrame  implements MouseListener,MouseMotionListene
 		this.setVisible(false);
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
+		this.getContentPane().setBackground(new Color(255,153,0));
 		
 	}
 
