@@ -39,6 +39,9 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 	int number;
 	int condition;
 	
+	//公共版特有的更新检测器
+	Update UpdateWindow;
+	
 	public ui() {
 		image.init();
 		FU=new floatUI();
@@ -47,7 +50,7 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		numberScreen=new 	JLabel("--",JLabel.CENTER);
 		//option=new JButton("设置");
-		logo_label=new JLabel(image.begin);
+		logo_label=new JLabel();
 		
 		
 		instruction=new JLabel("请输入最大学号");
@@ -131,20 +134,24 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 		
 		logo_label.setBounds(0, -30,400,400);
 		
-		try {
-		Thread.sleep(2500);
-		}catch(Exception e) {
-			
-		}
+		//开始开头动画
+		try{
+			for(int i=1;i<=120;i++) {
+				logo_label.setIcon(image.begin[i]);
+				Thread.sleep(25);
+			}
+		}catch(Exception e) {}
+		
+		
+		//结束开头动画
 		
 		this.input_number_ui();
 		
 		
 		
-		
-		
 	}
 	
+	//输入数字的界面
 	public void input_number_ui() {
 		logo_label.setIcon(null);
 		logo_label.setVisible(false);
@@ -158,6 +165,12 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 		instruction.setBounds(50, 100, 300, 50);
 		input.setBounds(50, 175, 250, 50);
 		check.setBounds(300, 175, 50, 50);
+		//---公共版特有的检测更新界面
+		UpdateWindow=new Update();
+		if(UpdateWindow.checkUpdate()) {
+			UpdateWindow.instWindow();
+		}
+		//公共版特有的检测更新界面---
 		
 	} 
 	
