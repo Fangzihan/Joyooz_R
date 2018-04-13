@@ -5,7 +5,13 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.net.URL;
 
-public class ui extends JFrame implements MouseListener,MouseMotionListener,ActionListener{
+public class ui extends JFrame implements MouseListener,MouseMotionListener,ActionListener,ComponentListener{
+	//全局变量
+	boolean buffer;	//当还未倒计时结束时不能点击
+	Dimension screenSize ;
+	ComponentListener cpl;
+	
+	//组件
 	floatUI FU;
 	JLabel numberScreen;
 	//JButton option;
@@ -47,7 +53,7 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 		FU=new floatUI();
 		number=1;
 		condition=0;
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		numberScreen=new 	JLabel("--",JLabel.CENTER);
 		//option=new JButton("设置");
 		logo_label=new JLabel();
@@ -175,6 +181,37 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 	} 
 	
 	public void choose_speed_ui() {
+		//添加窗口拖动检测器，拖动到边缘自动开启悬浮窗
+		this.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent e) {
+			
+				
+			}
+
+			@Override
+			public void componentMoved(ComponentEvent e) {
+				int x=getX();
+				int y=getY();
+				if(screenSize.getWidth()-x<400||screenSize.getHeight()-y<400) {
+					setVisible(false);
+					FU.setVisible(true);
+				}
+				
+			}
+
+			@Override
+			public void componentShown(ComponentEvent e) {
+				
+				
+			}
+
+			@Override
+			public void componentHidden(ComponentEvent e) {
+				
+				
+			}
+			});
 		//setInvisible
 		instruction.setVisible(false);
 		input.setVisible(false);
@@ -203,8 +240,9 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 	}
 	
 	public void number_ui() {
+		//buffer
+		buffer=true;
 		//setInvisible
-		this.add(border1_label);
 		border1_label.setBounds(0,0,400,50);
 		speed_choose_instruction.setVisible(false);
 		slow_button.setVisible(false);
@@ -239,8 +277,8 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 	public void mouseClicked(MouseEvent arg0) {
 			if(arg0.getButton()==MouseEvent.BUTTON1)
 			{
-				if(((arg0.getX()>40)&&(arg0.getX()<340))&&((arg0.getY()>75)&&(arg0.getY()<275))) {
-					if(condition==0) {
+				
+					if(condition==0&&buffer) {
 						Stop=null;
 						this.numberTool=new number_tool();
 						this.numberTool.start();
@@ -253,10 +291,9 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 						condition=0;
 					}
 			
-				}
+				
 			}else if(arg0.getButton()==MouseEvent.BUTTON3) 
 			{
-				border1_label.setVisible(false);
 				this.setVisible(false);
 				FU.setVisible(true);
 		
@@ -324,4 +361,29 @@ public class ui extends JFrame implements MouseListener,MouseMotionListener,Acti
 		this.numberScreen.setText(t);
 		
 	}
+
+	@Override
+	public void componentResized(ComponentEvent e) {
+		// TODO 自动生成的方法存根
+		
+	}
+
+	@Override
+	public void componentMoved(ComponentEvent e) {
+		// TODO 自动生成的方法存根
+		
+	}
+
+	@Override
+	public void componentShown(ComponentEvent e) {
+		// TODO 自动生成的方法存根
+		
+	}
+
+	@Override
+	public void componentHidden(ComponentEvent e) {
+		// TODO 自动生成的方法存根
+		
+	}
+
 }
